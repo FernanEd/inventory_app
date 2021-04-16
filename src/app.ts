@@ -17,7 +17,8 @@ app.get("/", (req, res) => {
 
 import config from "./utils/config";
 
-export default () => {
+export default async () => {
+  await mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true });
   app.listen(config.PORT, () => {
     console.log(`server started in port ${config.PORT}`);
   });
