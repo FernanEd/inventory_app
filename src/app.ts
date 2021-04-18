@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
-  res.send("hola");
+  res.render("../views/layout.pug");
 });
 
 import config from "./utils/config";

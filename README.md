@@ -2,7 +2,7 @@
 
 A market for the old and obscure.
 
-## Made with
+## Made with 🔨
 
 - NodeJS/Express
 - Typescript
