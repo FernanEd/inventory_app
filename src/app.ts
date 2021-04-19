@@ -15,6 +15,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../public")));
 
+import categoryRouter from "../src/routers/categoryRouter";
+
+app.use("/categories", categoryRouter);
+
 app.get("/", (req, res) => {
   res.render("../views/layout.pug");
 });

@@ -39,36 +39,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var mongoose_1 = __importDefault(require("mongoose"));
-var path_1 = __importDefault(require("path"));
-var morgan_1 = __importDefault(require("morgan"));
-var cors_1 = __importDefault(require("cors"));
-var app = express_1.default();
-app.set("views", path_1.default.join(__dirname, "../views"));
-app.set("view engine", "pug");
-app.use(cors_1.default());
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
-app.use(morgan_1.default("dev"));
-app.use(express_1.default.static(path_1.default.join(__dirname, "../public")));
-app.get("/", function (req, res) {
-    res.render("../views/layout.pug");
-});
-var config_1 = __importDefault(require("./utils/config"));
-exports.default = (function () { return __awaiter(void 0, void 0, void 0, function () {
+var category_1 = __importDefault(require("./../models/category"));
+var getAllCategories = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var docs, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, mongoose_1.default.connect(config_1.default.MONGODB_URI, {
-                    useNewUrlParser: true,
-                    useUnifiedTopology: true,
-                })];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, category_1.default.find()];
             case 1:
-                _a.sent();
-                app.listen(config_1.default.PORT, function () {
-                    console.log("server started in port " + config_1.default.PORT);
-                });
-                return [2 /*return*/];
+                docs = _a.sent();
+                res
+                    .status(200)
+                    .render("categories_list", { title: "Categories", categories: docs });
+                return [3 /*break*/, 3];
+            case 2:
+                e_1 = _a.sent();
+                res.status(400).end();
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
-}); });
+}); };
+exports.default = {
+    getAllCategories: getAllCategories,
+};
