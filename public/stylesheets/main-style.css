@@ -2,7 +2,7 @@
 
 :root {
   --dark: #333;
-  --gold: #efc94c;
+  --gold: #fd0;
   --primary: #e27a3f;
   --secondary: #888;
   --highlight: #df4949;
@@ -33,10 +33,79 @@ a:hover {
   color: var(--disabled);
 }
 
+@keyframes glowing {
+  0% {
+    filter: brightness(1);
+  }
+  25% {
+    filter: brightness(1.1);
+  }
+  50% {
+    filter: brightness(1.2);
+    text-shadow: 0px 0px 5px yellow;
+  }
+  75% {
+    filter: brightness(1.1);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
 #logo {
-  font-family: "Zen Dots", cursive;
-  color: var(--gold);
-  text-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.4);
+  background-color: var(--gold);
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.3),
+    rgba(0, 0, 0, 0.3)
+  );
+
+  background-clip: text;
+  font-family: "Times New Roman";
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  color: transparent;
+  font-size: 3rem;
+  animation: glowing 2s ease infinite;
+}
+
+#main-header {
+  text-align: center;
+}
+
+#main-header nav {
+}
+
+#main-header nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#main-header nav li {
+  background-color: var(--gold);
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.3),
+    rgba(0, 0, 0, 0.3)
+  );
+
+  text-transform: uppercase;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.4);
+}
+
+#main-header nav li:hover {
+  filter: brightness(1.2);
+}
+
+#main-header nav li a {
+  color: var(--dark);
 }
 
 #main-content {
