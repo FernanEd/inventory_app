@@ -12,7 +12,14 @@ block content
   
   hr.xsm
 
-  if items 
-    p ok
+  if items.length > 0
+    .items-wraper.xsm
+      for item in items 
+        .items-item 
+          img(src=(item.imgUrl), alt="Item image." class='item-img-sm')
+          .items-item-content
+            h3 #[a(href=(item.url)) #{item.name}]
+            p #[strong In stock:] #{item.stock}
+            p #[strong $#{item.price}.00] 
   else
     p This category has no items.

@@ -1,5 +1,6 @@
 import { Handler } from "express";
 import Category from "./../models/category";
+import Item from "./../models/item";
 
 export const getAllCategories: Handler = async (req, res) => {
   try {
@@ -18,9 +19,11 @@ export const getOneCategory: Handler = async (req, res) => {
   const { id } = req.params;
   try {
     const one = await Category.findById(id);
+    const items = await Item.find({ category: id });
     res.status(200).render("category_detail", {
       title: one.name,
       category: one,
+      items,
     });
   } catch (e) {
     console.log(e);
