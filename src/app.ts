@@ -16,8 +16,10 @@ app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../public")));
 
 import categoryRouter from "../src/routers/categoryRouter";
+import itemRouter from "../src/routers/itemRouter";
 
 app.use("/categories", categoryRouter);
+app.use("/items", itemRouter);
 
 app.get("/", (req, res) => {
   res.render("homepage", { title: "Home" });

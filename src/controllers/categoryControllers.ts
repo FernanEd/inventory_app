@@ -28,6 +28,8 @@ export const getOneCategory: Handler = async (req, res) => {
   }
 };
 
+// ADD
+
 export const getAddCategory: Handler = async (req, res) => {
   res.render("category_add", { title: "Add a new category" });
 };
@@ -37,7 +39,7 @@ export const postAddCategory: Handler = async (req, res) => {
   try {
     if (name && description) {
       const created = await Category.create({ name, description });
-      res.redirect("/categories");
+      res.redirect(`/categories/category/${created._id}`);
     } else {
       res.render("category_add", {
         title: "Add a new category",
@@ -50,6 +52,8 @@ export const postAddCategory: Handler = async (req, res) => {
     res.status(400).end();
   }
 };
+
+// EDIT
 
 export const getEditCategory: Handler = async (req, res) => {
   const { id } = req.params;
@@ -87,6 +91,8 @@ export const postEditCategory: Handler = async (req, res) => {
     res.status(400).end();
   }
 };
+
+// DELETE
 
 export const getDeleteCategory: Handler = async (req, res) => {
   const { id } = req.params;

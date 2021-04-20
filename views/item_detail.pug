@@ -1,0 +1,24 @@
+extends layout 
+
+block content 
+  h1=title  
+  p #{item.description}.
+  img.item-img(src=(item.imgUrl), alt="Item image.")
+
+  .btn-group 
+    a(href=(`/items/edit/${item._id}`))  
+      button(class='btn') Edit item
+    a(href=(`/items/delete/${item._id}`)) 
+      button(class='btn btn-silver') Delete item
+
+  p #[strong Category]: #[a(href=(item.category.url)) #{item.category.name}]
+
+  hr.xsm
+
+  .xsm.row
+    div 
+      h2 Price 
+      p $#{item.price}.00
+    div
+      h2 In stock
+      p #{item.stock}

@@ -2,9 +2,14 @@ extends layout
 
 block content 
   h1=title
-  a(href="/categories/add") #[button.btn Add category]   
+  .btn-group
+    a(href="/categories/add")
+      button.btn Add category
+    a(href="/items/add")
+      button.btn Add item
+
   p Categories list
 
   div(class='categories-wrapper sm')
-    for categorie in categories 
-      a(href=(categorie.url), class='btn btn-silver')=categorie.name
+    for category in categories 
+      a(href=(category.url), class='btn btn-silver')=category.name

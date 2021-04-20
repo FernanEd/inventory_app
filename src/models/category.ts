@@ -6,7 +6,7 @@ const CategorySchema = new Schema({
 });
 
 CategorySchema.virtual("url").get(function (this: any) {
-  return `/categories/${this!._id}`;
+  return `/categories/category/${this!._id}`;
 });
 
 export default model("Category", CategorySchema);

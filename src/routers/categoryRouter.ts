@@ -4,19 +4,21 @@ import * as controller from "../controllers/categoryControllers";
 const router = Router();
 
 router.get("/", controller.getAllCategories);
+router.get("/category/:id", controller.getOneCategory);
 
-router.get("/:id", controller.getOneCategory);
+router
+  .route("/add")
+  .get(controller.getAddCategory)
+  .post(controller.postAddCategory);
 
-router.get("/add", controller.getAddCategory);
+router
+  .route("/edit/:id")
+  .get(controller.getEditCategory)
+  .post(controller.postEditCategory);
 
-router.post("/add", controller.postAddCategory);
-
-router.get("/edit/:id", controller.getEditCategory);
-
-router.post("/edit/:id", controller.postEditCategory);
-
-router.get("/delete/:id", controller.getDeleteCategory);
-
-router.post("/delete/:id", controller.postDeleteCategory);
+router
+  .route("/delete/:id")
+  .get(controller.getDeleteCategory)
+  .post(controller.postDeleteCategory);
 
 export default router;
