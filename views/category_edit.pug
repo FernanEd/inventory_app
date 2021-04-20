@@ -1,0 +1,14 @@
+extends layout 
+
+block content 
+  h1=title
+  form(action="", method='POST', class='xsm')
+    .form-group 
+      label(for="") Category name 
+      input(type="text", name='name', value=(previous_form? previous_form.name: ''), class='form-input')
+    .form-group
+      label(for="") Description
+      input(type="text", name='description', value=(previous_form? previous_form.description: ''), class='form-input')
+    button(class='btn') Update
+  if validation_error 
+    p.error=validation_error

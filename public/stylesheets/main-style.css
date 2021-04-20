@@ -175,6 +175,13 @@ a:hover {
   filter: brightness(1.2);
 }
 
+.btn-group {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
