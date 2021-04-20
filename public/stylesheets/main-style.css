@@ -216,7 +216,7 @@ a:hover {
   width: 1280px;
 }
 
-form {
+.form {
   margin: 1rem auto;
   display: flex;
   flex-direction: column;
@@ -224,7 +224,7 @@ form {
   gap: 2rem;
 }
 
-form button {
+.form button {
   width: 100%;
 }
 

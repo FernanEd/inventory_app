@@ -2,11 +2,13 @@ extends layout
 
 block content 
   h1=title  
-  p=category.description
+  p #{category.description}.
 
   .btn-group 
-    a(href=(`/categories/edit/${category._id}`), class='btn') Edit category 
-    a(href=(`/categories/remove/${category._id}`), class='btn btn-silver') Delete category
+    a(href=(`/categories/edit/${category._id}`))  
+      button(class='btn') Edit category
+    a(href=(`/categories/delete/${category._id}`)) 
+      button(class='btn btn-silver') Delete category
   
   hr.xsm
 

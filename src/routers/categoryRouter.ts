@@ -15,4 +15,8 @@ router.get("/edit/:id", controller.getEditCategory);
 
 router.post("/edit/:id", controller.postEditCategory);
 
+router.get("/delete/:id", controller.getDeleteCategory);
+
+router.post("/delete/:id", controller.postDeleteCategory);
+
 export default router;

@@ -74,7 +74,7 @@ export const postEditCategory: Handler = async (req, res) => {
         name,
         description,
       });
-      res.redirect("/categories");
+      res.redirect(`/categories/${id}`);
     } else {
       res.render("category_edit", {
         title: "Edit category",
@@ -82,6 +82,31 @@ export const postEditCategory: Handler = async (req, res) => {
         validation_error: "Please fill up the fields",
       });
     }
+  } catch (e) {
+    console.log(e);
+    res.status(400).end();
+  }
+};
+
+export const getDeleteCategory: Handler = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const one = await Category.findById(id);
+    res.status(200).render("category_delete", {
+      title: "Delete category",
+      category: one,
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(400).end();
+  }
+};
+
+export const postDeleteCategory: Handler = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Category.findByIdAndDelete(id);
+    res.redirect("/categories");
   } catch (e) {
     console.log(e);
     res.status(400).end();
