@@ -10,6 +10,7 @@
   --disabled: #30505c;
   --light: #fff;
   --brass: #da7;
+  --silver: #abe;
 }
 
 body {
@@ -123,7 +124,6 @@ a:hover {
 
 #main-content {
   background-color: #e8e8e8;
-  padding: 0.5rem;
   border-radius: 0.25rem;
   margin: 0 0.5rem;
   box-shadow: 0px -4px 10px 1px rgba(0, 0, 0, 0.4);
@@ -133,6 +133,7 @@ a:hover {
   color: var(--dark);
 
   text-align: center;
+  padding: 1rem 0;
 }
 
 #main-footer {
@@ -160,6 +161,14 @@ a:hover {
   transition: filter 0.3s ease;
   color: var(--dark);
   font-size: 1rem;
+}
+
+.btn-gold {
+  background-color: var(--gold);
+}
+
+.btn-silver {
+  background-color: var(--silver);
 }
 
 .btn:hover {
@@ -210,4 +219,16 @@ form {
 
 form button {
   width: 100%;
+}
+
+.error {
+  color: var(--highlight);
+}
+
+.categories-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: auto;
 }

@@ -5,8 +5,10 @@ block content
   form(action="", method='POST', class='xsm')
     .form-group 
       label(for="") Category name 
-      input(type="text", name='name', class='form-input', required)
+      input(type="text", name='name', value=(previous_form? previous_form.name: ''), class='form-input')
     .form-group
       label(for="") Description
-      input(type="text", name='description', class='form-input', required)
+      input(type="text", name='description', value=(previous_form? previous_form.description: ''), class='form-input')
     button(class='btn') Submit
+  if validation_error 
+    p.error=validation_error

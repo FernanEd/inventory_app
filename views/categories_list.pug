@@ -4,6 +4,7 @@ block content
   h1=title
   a(href="categories/add") #[button.btn Add category]   
   p Categories list
-  ul 
-  for categorie in categories 
-    li categorie.description 
+
+  div(class='categories-wrapper sm')
+    for categorie in categories 
+      a(href=(categorie.url), class='btn btn-silver')=categorie.name
