@@ -9,6 +9,7 @@
   --link: #45b29d;
   --disabled: #30505c;
   --light: #fff;
+  --brass: #da7;
 }
 
 body {
@@ -17,6 +18,10 @@ body {
   color: red;
   margin: 0;
   padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 * {
@@ -45,7 +50,7 @@ a:hover {
   }
   50% {
     filter: brightness(1.2);
-    text-shadow: 0px 0px 5px yellow;
+    text-shadow: 0px 0px 5px var(--brass);
   }
   65% {
     filter: brightness(1.1);
@@ -59,7 +64,11 @@ a:hover {
 }
 
 #logo {
-  background-color: var(--gold);
+  margin: 1rem 0;
+}
+
+#logo h1 {
+  background-color: var(--brass);
   background-image: linear-gradient(
     rgba(255, 255, 255, 0.3),
     rgba(0, 0, 0, 0.3)
@@ -72,6 +81,24 @@ a:hover {
   color: transparent;
   font-size: 3rem;
   animation: glowing 2.3s ease infinite;
+  margin: 0;
+}
+
+#logo p {
+  background-color: var(--brass);
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.3),
+    rgba(0, 0, 0, 0.3)
+  );
+
+  background-clip: text;
+  font-family: "Times New Roman";
+  letter-spacing: 0.2rem;
+  color: transparent;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+  font-size: 1.25rem;
+  margin: 0;
 }
 
 #main-header {
@@ -91,17 +118,15 @@ a:hover {
 }
 
 #main-header nav li {
-  background-color: var(--gold);
+  background-color: var(--brass);
   background-image: linear-gradient(
     rgba(255, 255, 255, 0.3),
     rgba(0, 0, 0, 0.3)
   );
 
-  text-transform: uppercase;
-  padding: 1rem;
+  padding: 0.25rem 0.5rem;
   text-align: center;
   border-radius: 0.25rem;
-  font-weight: bold;
   cursor: pointer;
   box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.4);
 
@@ -117,18 +142,24 @@ a:hover {
 }
 
 #main-content {
-  background-color: var(--light);
+  background-color: #e8e8e8;
   padding: 0.5rem;
   border-radius: 1rem 1rem 0 0;
   box-shadow: 0px -4px 10px 1px rgba(0, 0, 0, 0.4);
   margin-top: 1rem;
+
+  border: 5px ridge var(--brass);
+  color: var(--dark);
+}
+
+#main-content * {
+  font-family: "Times New Roman";
 }
 
 #main-footer {
-  margin: auto;
-  align-self: flex-end;
   background-color: var(--dark);
   color: var(--light);
   padding: 1rem;
   text-align: center;
+  margin: auto 0 0 0;
 }
