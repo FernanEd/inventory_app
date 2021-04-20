@@ -20,7 +20,7 @@ import categoryRouter from "../src/routers/categoryRouter";
 app.use("/categories", categoryRouter);
 
 app.get("/", (req, res) => {
-  res.render("../views/layout.pug");
+  res.render("homepage", { title: "Home" });
 });
 
 import config from "./utils/config";
