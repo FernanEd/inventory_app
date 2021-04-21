@@ -74,10 +74,19 @@ export const postAddItem: Handler = async (req, res) => {
 export const getEditItem: Handler = async (req, res) => {
   const { id } = req.params;
   try {
-    const { name, description } = await Item.findById(id);
-    res.status(200).render("category_edit", {
-      title: "Edit category",
-      previous_form: { name, description },
+    const {
+      name,
+      description,
+      category,
+      price,
+      stock,
+      imgUrl,
+    } = await Item.findById(id);
+    const categories = await Category.find();
+    res.status(200).render("item_edit", {
+      title: "Edit item",
+      previous_form: { name, description, category, price, stock, imgUrl },
+      categories,
     });
   } catch (e) {
     console.log(e);
@@ -87,18 +96,24 @@ export const getEditItem: Handler = async (req, res) => {
 
 export const postEditItem: Handler = async (req, res) => {
   const { id } = req.params;
-  const { name, description } = req.body;
+  const { name, description, category, price, stock, imgUrl } = req.body;
   try {
-    if (name && description) {
+    if (name && description && category && price && stock && imgUrl) {
       const edited = await Item.findByIdAndUpdate(id, {
         name,
         description,
+        category,
+        price,
+        stock,
+        imgUrl,
       });
-      res.redirect(`/categories/${id}`);
+      res.redirect(`/items/item/${id}`);
     } else {
-      res.render("category_edit", {
-        title: "Edit category",
-        previous_form: { name, description },
+      const categories = await Category.find();
+      res.render("item_edit", {
+        title: "Edit item",
+        categories,
+        previous_form: { name, description, category, price, stock, imgUrl },
         validation_error: "Please fill up the fields",
       });
     }

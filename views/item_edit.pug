@@ -1,0 +1,38 @@
+extends layout 
+
+block content 
+  h1=title
+  if previous_form 
+    p lol
+    
+  form(action="", method='POST', class='form')
+    .form-group 
+      label(for="") Item name 
+      input(type="text", name='name', value=(previous_form? previous_form.name: ''), class='form-input')
+    .form-group
+      label(for="") Description
+      input(type="text", name='description', value=(previous_form? previous_form.description: ''), class='form-input')
+    .form-group
+      label(for="") Category
+      select(name='category')
+        for category in categories
+          if previous_form
+            if String(category._id) === String(previous_form.category)
+              option(value=(category._id), selected='selected') #{category.name}
+            else 
+              option(value=(category._id)) #{category.name} 
+          else 
+            option(value=(category._id)) #{category.name} 
+    .form-group
+      label(for="") Price
+      input(type="number", name='price', min='1', value=(previous_form? previous_form.price: ''), class='form-input')
+    .form-group
+      label(for="") Quantity
+      input(type="number", name='stock', min='1', value=(previous_form? previous_form.stock: ''), class='form-input')
+    .form-group
+      label(for="") Image URL
+      input(type="text", name='imgUrl', value=(previous_form? previous_form.imgUrl: ''), class='form-input')
+    button(class='btn') Update
+
+  if validation_error 
+    p.error=validation_error
