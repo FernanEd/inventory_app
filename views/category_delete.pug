@@ -5,7 +5,7 @@ block content
   p Are you sure you want to delete #{category.name}?
 
   .btn-group 
-    a(href="/categories")
+    a(href=(category.url))
       button.btn Go back 
 
     form(action="", method='POST')

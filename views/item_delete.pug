@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+  h1=title
+  p Are you sure you want to delete #{item.name}?
+
+  .btn-group 
+    a(href=(item.url))
+      button.btn Go back 
+
+    form(action="", method='POST')
+      button(class='btn btn-silver') Delete
