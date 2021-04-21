@@ -130,8 +130,8 @@ export const getDeleteItem: Handler = async (req, res) => {
   try {
     const one = await Item.findById(id);
     res.status(200).render("item_delete", {
-      title: "Delete category",
-      category: one,
+      title: "Delete item",
+      item: one,
     });
   } catch (e) {
     console.log(e);
