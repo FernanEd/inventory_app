@@ -81,7 +81,7 @@ export const postEditCategory: Handler = async (req, res) => {
         name,
         description,
       });
-      res.redirect(`/categories/${id}`);
+      res.redirect(`/categories/category/${id}`);
     } else {
       res.render("category_edit", {
         title: "Edit category",

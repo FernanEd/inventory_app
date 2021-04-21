@@ -31,6 +31,7 @@ export default async () => {
   await mongoose.connect(config.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   });
   app.listen(config.PORT, () => {
     console.log(`server started in port ${config.PORT}`);

@@ -2,7 +2,7 @@ extends layout
 
 block content 
   h1=title
-  form(action="", method='POST', class='form xsm')
+  form(action="", method='POST', class='form')
     .form-group 
       label(for="") Category name 
       input(type="text", name='name', value=(previous_form? previous_form.name: ''), class='form-input')

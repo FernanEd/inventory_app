@@ -6,7 +6,7 @@
   --primary: #e27a3f;
   --secondary: #888;
   --highlight: #df4949;
-  --link: #45b29d;
+  --link: #48f;
   --disabled: #30505c;
   --light: #fff;
   --brass: #da7;
@@ -32,11 +32,12 @@ body {
 a {
   text-decoration: none;
   color: var(--link);
-  transition: color 0.3s ease;
+  transition: filter 0.3s ease;
 }
 
 a:hover {
-  color: var(--disabled);
+  filter: brightness(1.2);
+  text-decoration: underline;
 }
 
 @keyframes glowing {
@@ -125,16 +126,17 @@ a:hover {
 #main-content {
   background-color: #e8e8e8;
 
-  margin: 0 0.5rem;
   box-shadow: 0px -4px 10px 1px rgba(0, 0, 0, 0.4);
-  margin-top: 1rem;
 
   border: 5px ridge var(--brass);
   border-radius: 0.25rem;
   color: var(--dark);
 
   text-align: center;
-  padding: 1rem 0;
+  padding: 1rem;
+
+  max-width: 768px;
+  margin: 1rem auto;
 }
 
 #main-footer {
@@ -223,10 +225,8 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
-}
 
-.form button {
-  width: 100%;
+  width: 500px;
 }
 
 .error {
@@ -281,8 +281,9 @@ hr {
 .items-item {
   border-radius: 0.5rem;
   padding: 0.5rem;
+  border: 5px ridge var(--brass);
   box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.4);
-
+  background-color: #edd;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -290,4 +291,10 @@ hr {
 
 .items-item-content {
   text-align: left;
+}
+
+@media (max-width: 768px) {
+  .form {
+    width: 100%;
+  }
 }
