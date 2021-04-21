@@ -5,6 +5,7 @@ const router = Router();
 
 router.get("/", controller.getAllCategories);
 router.get("/category/:id", controller.getOneCategory);
+router.get("/all", controller.getAllItems);
 
 router
   .route("/add")

@@ -2,6 +2,19 @@ import { Handler } from "express";
 import Category from "./../models/category";
 import Item from "./../models/item";
 
+export const getAllItems: Handler = async (req, res) => {
+  try {
+    const docs = await Item.find();
+    res.status(200).render("category_all", {
+      title: "All categories",
+      items: docs,
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(400).end();
+  }
+};
+
 export const getAllCategories: Handler = async (req, res) => {
   try {
     const docs = await Category.find();
