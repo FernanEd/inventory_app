@@ -11,6 +11,6 @@ block content
   p Categories list
 
   div(class='categories-wrapper')
-    a(href=('/categories/all'), class='btn btn-gold') All categories
+    a(href=('/categories/all'), class='btn btn-gold') All items
     for category in categories 
       a(href=(category.url), class='btn btn-silver')=category.name

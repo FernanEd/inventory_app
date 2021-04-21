@@ -6,7 +6,7 @@ export const getAllItems: Handler = async (req, res) => {
   try {
     const docs = await Item.find().populate("category").exec();
     res.status(200).render("category_all", {
-      title: "All categories",
+      title: "All items",
       items: docs,
     });
   } catch (e) {
