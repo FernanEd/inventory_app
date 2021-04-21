@@ -20,21 +20,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
-var controller = __importStar(require("../controllers/categoryControllers"));
+var controller = __importStar(require("../controllers/itemControllers"));
 var router = express_1.Router();
-router.get("/", controller.getAllCategories);
-router.get("/category/:id", controller.getOneCategory);
-router.get("/all", controller.getAllItems);
-router
-    .route("/add")
-    .get(controller.getAddCategory)
-    .post(controller.postAddCategory);
+router.get("/", controller.getAllItems);
+router.get("/item/:id", controller.getOneItem);
+router.route("/add").get(controller.getAddItem).post(controller.postAddItem);
 router
     .route("/edit/:id")
-    .get(controller.getEditCategory)
-    .post(controller.postEditCategory);
+    .get(controller.getEditItem)
+    .post(controller.postEditItem);
 router
     .route("/delete/:id")
-    .get(controller.getDeleteCategory)
-    .post(controller.postDeleteCategory);
+    .get(controller.getDeleteItem)
+    .post(controller.postDeleteItem);
 exports.default = router;

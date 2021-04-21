@@ -52,8 +52,12 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(morgan_1.default("dev"));
 app.use(express_1.default.static(path_1.default.join(__dirname, "../public")));
+var categoryRouter_1 = __importDefault(require("./routers/categoryRouter"));
+var itemRouter_1 = __importDefault(require("./routers/itemRouter"));
+app.use("/categories", categoryRouter_1.default);
+app.use("/items", itemRouter_1.default);
 app.get("/", function (req, res) {
-    res.render("../views/layout.pug");
+    res.render("homepage", { title: "Home" });
 });
 var config_1 = __importDefault(require("./utils/config"));
 exports.default = (function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -62,6 +66,7 @@ exports.default = (function () { return __awaiter(void 0, void 0, void 0, functi
             case 0: return [4 /*yield*/, mongoose_1.default.connect(config_1.default.MONGODB_URI, {
                     useNewUrlParser: true,
                     useUnifiedTopology: true,
+                    useFindAndModify: false,
                 })];
             case 1:
                 _a.sent();

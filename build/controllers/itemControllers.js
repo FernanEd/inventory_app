@@ -39,20 +39,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postDeleteCategory = exports.getDeleteCategory = exports.postEditCategory = exports.getEditCategory = exports.postAddCategory = exports.getAddCategory = exports.getOneCategory = exports.getAllCategories = exports.getAllItems = void 0;
-var category_1 = __importDefault(require("./../models/category"));
-var item_1 = __importDefault(require("./../models/item"));
+exports.postDeleteItem = exports.getDeleteItem = exports.postEditItem = exports.getEditItem = exports.postAddItem = exports.getAddItem = exports.getOneItem = exports.getAllItems = void 0;
+var item_1 = __importDefault(require("../models/item"));
+var category_1 = __importDefault(require("../models/category"));
 var getAllItems = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var docs, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, item_1.default.find().populate("category").exec()];
+                return [4 /*yield*/, item_1.default.find()];
             case 1:
                 docs = _a.sent();
-                res.status(200).render("category_all", {
-                    title: "All items",
+                res.status(200).render("item_list", {
+                    title: "Items",
                     items: docs,
                 });
                 return [3 /*break*/, 3];
@@ -66,169 +66,176 @@ var getAllItems = function (req, res) { return __awaiter(void 0, void 0, void 0,
     });
 }); };
 exports.getAllItems = getAllItems;
-var getAllCategories = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var docs, e_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, category_1.default.find()];
-            case 1:
-                docs = _a.sent();
-                res.status(200).render("categories_list", {
-                    title: "Categories",
-                    categories: docs,
-                });
-                return [3 /*break*/, 3];
-            case 2:
-                e_2 = _a.sent();
-                console.log(e_2);
-                res.status(400).end();
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.getAllCategories = getAllCategories;
-var getOneCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, one, items, e_3;
+var getOneItem = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, one, e_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 id = req.params.id;
                 _a.label = 1;
             case 1:
-                _a.trys.push([1, 4, , 5]);
-                return [4 /*yield*/, category_1.default.findById(id)];
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, item_1.default.findById(id).populate("category").exec()];
             case 2:
                 one = _a.sent();
-                return [4 /*yield*/, item_1.default.find({ category: id })];
-            case 3:
-                items = _a.sent();
-                res.status(200).render("category_detail", {
+                res.status(200).render("item_detail", {
                     title: one.name,
-                    category: one,
-                    items: items,
-                });
-                return [3 /*break*/, 5];
-            case 4:
-                e_3 = _a.sent();
-                console.log(e_3);
-                res.status(400).end();
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
-        }
-    });
-}); };
-exports.getOneCategory = getOneCategory;
-// ADD
-var getAddCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        res.render("category_add", { title: "Add a new category" });
-        return [2 /*return*/];
-    });
-}); };
-exports.getAddCategory = getAddCategory;
-var postAddCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, description, created, e_4;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _a = req.body, name = _a.name, description = _a.description;
-                _b.label = 1;
-            case 1:
-                _b.trys.push([1, 5, , 6]);
-                if (!(name && description)) return [3 /*break*/, 3];
-                return [4 /*yield*/, category_1.default.create({ name: name, description: description })];
-            case 2:
-                created = _b.sent();
-                res.redirect("/categories/category/" + created._id);
-                return [3 /*break*/, 4];
-            case 3:
-                res.render("category_add", {
-                    title: "Add a new category",
-                    previous_form: { name: name, description: description },
-                    validation_error: "Please fill up the fields",
-                });
-                _b.label = 4;
-            case 4: return [3 /*break*/, 6];
-            case 5:
-                e_4 = _b.sent();
-                console.log(e_4);
-                res.status(400).end();
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
-        }
-    });
-}); };
-exports.postAddCategory = postAddCategory;
-// EDIT
-var getEditCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, _a, name_1, description, e_5;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                id = req.params.id;
-                _b.label = 1;
-            case 1:
-                _b.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, category_1.default.findById(id)];
-            case 2:
-                _a = _b.sent(), name_1 = _a.name, description = _a.description;
-                res.status(200).render("category_edit", {
-                    title: "Edit category",
-                    previous_form: { name: name_1, description: description },
+                    item: one,
                 });
                 return [3 /*break*/, 4];
             case 3:
-                e_5 = _b.sent();
-                console.log(e_5);
+                e_2 = _a.sent();
+                console.log(e_2);
                 res.status(400).end();
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }
     });
 }); };
-exports.getEditCategory = getEditCategory;
-var postEditCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, _a, name, description, edited, e_6;
+exports.getOneItem = getOneItem;
+// ADD
+var getAddItem = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var categories, e_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, category_1.default.find()];
+            case 1:
+                categories = _a.sent();
+                res.render("item_add", { title: "Add a new item", categories: categories });
+                return [3 /*break*/, 3];
+            case 2:
+                e_3 = _a.sent();
+                console.log(e_3);
+                res.status(400).end();
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getAddItem = getAddItem;
+var postAddItem = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, name, description, category, price, stock, imgUrl, created, categories, e_4;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = req.body, name = _a.name, description = _a.description, category = _a.category, price = _a.price, stock = _a.stock, imgUrl = _a.imgUrl;
+                _b.label = 1;
+            case 1:
+                _b.trys.push([1, 6, , 7]);
+                if (!(name && description && category && price && stock && imgUrl)) return [3 /*break*/, 3];
+                return [4 /*yield*/, item_1.default.create({
+                        name: name,
+                        description: description,
+                        category: category,
+                        price: price,
+                        stock: stock,
+                        imgUrl: imgUrl,
+                    })];
+            case 2:
+                created = _b.sent();
+                res.redirect("/items/item/" + created._id);
+                return [3 /*break*/, 5];
+            case 3: return [4 /*yield*/, category_1.default.find()];
+            case 4:
+                categories = _b.sent();
+                res.render("item_add", {
+                    title: "Add a new item",
+                    categories: categories,
+                    previous_form: { name: name, description: description, category: category, price: price, stock: stock, imgUrl: imgUrl },
+                    validation_error: "Please fill up the fields",
+                });
+                _b.label = 5;
+            case 5: return [3 /*break*/, 7];
+            case 6:
+                e_4 = _b.sent();
+                console.log(e_4);
+                res.status(400).end();
+                return [3 /*break*/, 7];
+            case 7: return [2 /*return*/];
+        }
+    });
+}); };
+exports.postAddItem = postAddItem;
+// EDIT
+var getEditItem = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, _a, name_1, description, category, price, stock, imgUrl, categories, e_5;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 id = req.params.id;
-                _a = req.body, name = _a.name, description = _a.description;
                 _b.label = 1;
             case 1:
-                _b.trys.push([1, 5, , 6]);
-                if (!(name && description)) return [3 /*break*/, 3];
-                return [4 /*yield*/, category_1.default.findByIdAndUpdate(id, {
-                        name: name,
-                        description: description,
-                    })];
+                _b.trys.push([1, 4, , 5]);
+                return [4 /*yield*/, item_1.default.findById(id)];
             case 2:
-                edited = _b.sent();
-                res.redirect("/categories/category/" + id);
-                return [3 /*break*/, 4];
+                _a = _b.sent(), name_1 = _a.name, description = _a.description, category = _a.category, price = _a.price, stock = _a.stock, imgUrl = _a.imgUrl;
+                return [4 /*yield*/, category_1.default.find()];
             case 3:
-                res.render("category_edit", {
-                    title: "Edit category",
-                    previous_form: { name: name, description: description },
-                    validation_error: "Please fill up the fields",
+                categories = _b.sent();
+                res.status(200).render("item_edit", {
+                    title: "Edit item",
+                    previous_form: { name: name_1, description: description, category: category, price: price, stock: stock, imgUrl: imgUrl },
+                    categories: categories,
                 });
-                _b.label = 4;
-            case 4: return [3 /*break*/, 6];
-            case 5:
-                e_6 = _b.sent();
-                console.log(e_6);
+                return [3 /*break*/, 5];
+            case 4:
+                e_5 = _b.sent();
+                console.log(e_5);
                 res.status(400).end();
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); };
-exports.postEditCategory = postEditCategory;
+exports.getEditItem = getEditItem;
+var postEditItem = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, _a, name, description, category, price, stock, imgUrl, edited, categories, e_6;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                id = req.params.id;
+                _a = req.body, name = _a.name, description = _a.description, category = _a.category, price = _a.price, stock = _a.stock, imgUrl = _a.imgUrl;
+                _b.label = 1;
+            case 1:
+                _b.trys.push([1, 6, , 7]);
+                if (!(name && description && category && price && stock && imgUrl)) return [3 /*break*/, 3];
+                return [4 /*yield*/, item_1.default.findByIdAndUpdate(id, {
+                        name: name,
+                        description: description,
+                        category: category,
+                        price: price,
+                        stock: stock,
+                        imgUrl: imgUrl,
+                    })];
+            case 2:
+                edited = _b.sent();
+                res.redirect("/items/item/" + id);
+                return [3 /*break*/, 5];
+            case 3: return [4 /*yield*/, category_1.default.find()];
+            case 4:
+                categories = _b.sent();
+                res.render("item_edit", {
+                    title: "Edit item",
+                    categories: categories,
+                    previous_form: { name: name, description: description, category: category, price: price, stock: stock, imgUrl: imgUrl },
+                    validation_error: "Please fill up the fields",
+                });
+                _b.label = 5;
+            case 5: return [3 /*break*/, 7];
+            case 6:
+                e_6 = _b.sent();
+                console.log(e_6);
+                res.status(400).end();
+                return [3 /*break*/, 7];
+            case 7: return [2 /*return*/];
+        }
+    });
+}); };
+exports.postEditItem = postEditItem;
 // DELETE
-var getDeleteCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var getDeleteItem = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, one, e_7;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -237,12 +244,12 @@ var getDeleteCategory = function (req, res) { return __awaiter(void 0, void 0, v
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, category_1.default.findById(id)];
+                return [4 /*yield*/, item_1.default.findById(id)];
             case 2:
                 one = _a.sent();
-                res.status(200).render("category_delete", {
-                    title: "Delete category",
-                    category: one,
+                res.status(200).render("item_delete", {
+                    title: "Delete item",
+                    item: one,
                 });
                 return [3 /*break*/, 4];
             case 3:
@@ -254,8 +261,8 @@ var getDeleteCategory = function (req, res) { return __awaiter(void 0, void 0, v
         }
     });
 }); };
-exports.getDeleteCategory = getDeleteCategory;
-var postDeleteCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+exports.getDeleteItem = getDeleteItem;
+var postDeleteItem = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, e_8;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -264,7 +271,7 @@ var postDeleteCategory = function (req, res) { return __awaiter(void 0, void 0, 
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, category_1.default.findByIdAndDelete(id)];
+                return [4 /*yield*/, item_1.default.findByIdAndDelete(id)];
             case 2:
                 _a.sent();
                 res.redirect("/categories");
@@ -278,4 +285,4 @@ var postDeleteCategory = function (req, res) { return __awaiter(void 0, void 0, 
         }
     });
 }); };
-exports.postDeleteCategory = postDeleteCategory;
+exports.postDeleteItem = postDeleteItem;

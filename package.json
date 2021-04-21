@@ -1,9 +1,11 @@
 {
-  "name": "inventory_app",
+  "name": "Antique-Market",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node build/index.js",
+    "build": "tsc",
     "dev": "ts-node-dev src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
